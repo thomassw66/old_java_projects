@@ -1,0 +1,18 @@
+import java.awt.Color;
+import java.awt.Graphics;
+
+public class GTEnvironment {
+
+	final int EWIDTH;
+	final int EHIEGHT;
+	
+	public GTEnvironment(int w, int h){
+		EWIDTH = w;
+		EHIEGHT = h;
+	}
+	
+	public void paint(Graphics g){
+		g.setColor(Color.WHITE);
+		g.fillRect(0,0,EWIDTH,EHIEGHT);
+	}
+}

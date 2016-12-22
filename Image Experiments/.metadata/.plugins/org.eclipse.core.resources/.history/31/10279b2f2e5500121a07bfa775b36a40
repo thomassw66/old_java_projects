@@ -1,0 +1,61 @@
+import java.awt.image.BufferedImage;
+
+
+public class FeatureExtraction {
+	public static  BufferedImage getEdges(BufferedImage a){
+		return (new BlurMask(a)).result();
+	}
+}
+class BlurMask extends Mask{
+	int [][] delta = {{0,0},{-1,-1},{0,-1},{1,-1},{-1,0},{1,0},{-1,1},{0,1},{1,1}};
+	double [] weight = {.6,.05,.05,.05,.05,.05,.05,.05,.05};
+	public BlurMask(BufferedImage b){
+		super(b);
+	}
+	public int filter(int x, int y) {
+		double newValue = 0.0;
+		for(int i = 0; i < delta.length; i++){
+			int nx = x + delta[i][0];
+			int ny = y + delta[i][1];
+			if(inBounds(nx,ny)){
+				newValue += (weight[i] * ((double)RGB.fromRGB(image.getRGB(nx, ny))[0]));
+			}
+		}
+		return (int)newValue;
+	}
+}
+class EdgeMask extends Mask{
+	VerticalMask x;
+	HorizontalMask y;
+	
+	public EdgeMask(BufferedImage b){
+		super(b);
+		x = new VerticalMask(b);
+		y = new HorizontalMask(b);
+	}
+	public int filter(int xi,int yi){
+		return (int) Math.sqrt(Math.pow(x.filter(xi, yi),2) + Math.pow(y.filter(xi, yi),2));
+	}
+}
+class VerticalMask extends Mask{
+	public VerticalMask(BufferedImage b){
+		super(b);
+	}
+	public int filter(int x, int y) {
+		if(x+1 >= image.getWidth())return 0;
+		int a = RGB.fromRGB(image.getRGB(x, y))[0];
+		int b = RGB.fromRGB(image.getRGB(x+1, y))[0];
+		return Math.abs(a - b);
+	}
+}
+class HorizontalMask extends Mask{
+	public HorizontalMask(BufferedImage b){
+		super(b);
+	}
+	public int filter(int x, int y) {
+		if(y+1 >= image.getHeight())return 0;
+		int a = RGB.fromRGB(image.getRGB(x, y))[0];
+		int b = RGB.fromRGB(image.getRGB(x, y+1))[0];
+		return Math.abs(a - b);
+	}
+}

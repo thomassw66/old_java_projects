@@ -1,0 +1,17 @@
+import java.awt.Dimension;
+import java.awt.Toolkit;
+
+import javax.swing.JFrame;
+
+
+public class MapEditFrame extends JFrame{
+
+	public MapEditFrame(){
+		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+		setSize(screen);
+		setVisible(true);
+	}
+	public static void main(String[] args){
+		JFrame a = new MapEditFrame();
+	}
+}

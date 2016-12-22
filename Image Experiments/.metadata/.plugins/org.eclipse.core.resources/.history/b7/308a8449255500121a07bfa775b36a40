@@ -1,0 +1,16 @@
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+import javax.swing.JFrame;
+
+
+public class PhotoTest {
+
+	public static void main(String [] args) throws IOException{
+		JFrame photoWin = new JFrame();
+		photoWin.add(new MainPanel(ImageIO.read(new File("C:\\Users\\Public\\Pictures\\Sample Pictures\\tulips.jpg"))));
+		photoWin.setSize(1023,723);
+		photoWin.setVisible(true);
+	}
+}

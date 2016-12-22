@@ -1,0 +1,23 @@
+
+public class Robot {
+
+	double x,y;
+	double orientation;
+	
+	static final double PI = Math.PI;
+	static final double PIx2 = PI * 2;
+	
+	public Robot(double x, double y, double orientation){
+		this.x = x;
+		this.y = y;
+		this.orientation = orientation;
+	}
+	public void move(int dist){
+		y += (Math.cos(orientation) * dist);
+		x += (Math.sin(orientation) * dist);
+	}
+	public void rotate(double orientation){
+		this.orientation += orientation;
+		this.orientation = this.orientation % PIx2;
+	}
+}

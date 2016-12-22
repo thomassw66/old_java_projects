@@ -1,0 +1,25 @@
+import java.util.Scanner;
+
+
+public class Main {
+	
+	public static void main(String [] args){
+		Scanner kb = new Scanner(System.in);
+		
+		int CASE = 1;
+		int n = kb.nextInt(); kb.nextLine();
+		while(n != -1){
+			System.out.println("Case " + CASE++ +": " + pastesRequired(n));
+			n = kb.nextInt(); kb.nextLine();
+		}
+	}
+	static int pastesRequired(int lines){
+		int i = 1;
+		int pastes = 1;
+		while(i < lines){
+			pastes++;
+			i <<= 1;
+		}
+		return pastes;
+	}
+}

@@ -1,0 +1,15 @@
+
+public class SpeedTest {
+
+	public static void main(String [] args){
+		long b = Long.MAX_VALUE,a;
+		boolean c = true;
+		a = System.nanoTime();
+		
+		while(c){
+			b = System.nanoTime();
+			c = false;
+		}
+		System.out.println(b - a);
+	}
+}

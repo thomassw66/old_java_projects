@@ -1,0 +1,39 @@
+import java.awt.Color;
+import java.awt.Graphics;
+import java.util.Arrays;
+
+public class GTEnvironment {
+
+	final int EWIDTH;
+	final int EHIEGHT;
+	
+	public GTEnvironment(int w, int h){
+		EWIDTH = w;
+		EHIEGHT = h;
+	}
+	
+	public void paint(Graphics g){
+		g.fillRect(0,0,EWIDTH,EHIEGHT);
+		
+		double [] x = {0,100,130,200,200,240,250,400,500,600,650};
+		double [] y = {0,400,400,200,300,230,320,210,123,322,323};
+		GTPath p = new GTPath(x,y);
+		
+		
+		p.draw(g);
+		double [] sx = smooth(x,.5,.1),sy = smooth(y,.5,.1);
+		GTPath p2 = new GTPath(sx,sy);
+		p2.draw(g);
+		
+	}
+	static double [] smooth(double [] x, double data_w, double smooth_w){
+		double [] y = x.clone();
+		
+		for(int i = 1; i < x.length - 1; i++){
+			y[i] += data_w * (x[i] - y[i]);
+			y[i] += smooth_w * (y[i+1] + y[i-1] - 2*y[i]);
+		}
+		System.out.println(Arrays.toString(x) + " -> "+Arrays.toString(y));
+		return y;
+	}
+}

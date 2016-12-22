@@ -1,0 +1,14 @@
+import javax.swing.*;
+import java.awt.*;
+
+public class GTViewingWindow extends JFrame{
+
+	public GTViewingWindow(){
+		setSize(600, 500);
+		setLocation(200, 100);
+		setVisible(true);
+	}
+	public static void main(String [] args){
+		Frame f = new GTViewingWindow();
+	}
+}

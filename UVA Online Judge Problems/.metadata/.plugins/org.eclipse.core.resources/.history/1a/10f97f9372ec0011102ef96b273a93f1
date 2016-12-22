@@ -1,0 +1,61 @@
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Hashtable;
+import java.util.Scanner;
+
+
+public class Main {
+
+	public static void main(String [] args){
+		Scanner in = new Scanner(System.in);
+		int CASE = 1;
+		int nodes; 
+		while((nodes = in.nextInt()) != 0){
+			ArrayList<Integer> points[] = (ArrayList<Integer>[])new ArrayList[nodes];
+			int [] memory = new int [nodes];
+			for(int i = 0; i < nodes; i ++){
+				points[i] = new ArrayList<Integer>();
+			}
+			int start = in.nextInt() - 1;
+			
+			int p,q;
+			while(true){
+				p = in.nextInt(); 
+				q = in.nextInt();
+				if(p == 0 && q == 0)
+					break;
+				
+				points[p-1].add(q - 1);
+			}
+			ArrayList<Integer> queue = new ArrayList<Integer>();
+			queue.add(start);
+			int last = start;
+			while(queue.size() > 0){
+				int a = queue.remove(0);
+				int ncost = memory[a] + 1;
+				for(int i : points[a]){
+					memory[i] = ncost;
+				}
+				if(true)
+				queue.addAll(points[a]);
+				
+				last = a;
+			}
+			System.out.println("Case "+(CASE++) +": longest path from length " + (start+1) + " has length " + memory[last] + " finishing at "+ (last+1));
+		}
+	}
+}
+/*
+class State implements Comparable<State>{
+	int pos;
+	int cost;
+	public State(int p, int c){
+		pos = p;cost = c;
+	}
+	public int compareTo(State arg0) {
+		int a = this.cost - arg0.cost;
+		return a;
+	}
+	
+}
+*/

@@ -1,0 +1,7 @@
+
+public class MapEditFrame extends JFrame{
+
+	public DrawingFrame(){
+		
+	}
+}

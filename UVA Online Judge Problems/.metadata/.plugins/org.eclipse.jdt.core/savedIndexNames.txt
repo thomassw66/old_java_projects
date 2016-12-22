@@ -1,0 +1,12 @@
+INDEX VERSION 1.126+C:\Users\Thomas\java\UVA Online Judge Problems\.metadata\.plugins\org.eclipse.jdt.core
+946453948.index
+2370873689.index
+875966335.index
+2025749538.index
+404686096.index
+1261674685.index
+3102091093.index
+3448346421.index
+2625112263.index
+3606022126.index
+2601388101.index

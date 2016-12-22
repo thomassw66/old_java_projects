@@ -1,0 +1,49 @@
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
+
+import javax.swing.*;
+
+
+public class MapEditFrame extends JFrame{
+
+	Image mapimage = null;
+	private JMenuBar menu;
+	
+	private Container content;
+	
+	public void init(String text){
+		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+		setSize(screen);
+		setTitle(text);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		content = getContentPane();
+		
+		
+		if(mapimage == null)
+			mapimage = new BufferedImage(screen.width, screen.height, BufferedImage.TYPE_INT_RGB);
+		
+		setVisible(true);
+	}
+	void initMenuBar(){
+		menu = new JMenuBar();
+		JMenu file = new JMenu("file");
+		menu.add(file);
+		content.add(BorderLayout.NORTH, menu);
+	}
+	public MapEditFrame(Image a){
+		mapimage = a;
+		init("Map From Existing Picture");
+	}
+	public MapEditFrame(){
+		init("New Map From Scratch");
+	}
+	public static void main(String[] args){
+		JFrame a = new MapEditFrame();
+	}
+}

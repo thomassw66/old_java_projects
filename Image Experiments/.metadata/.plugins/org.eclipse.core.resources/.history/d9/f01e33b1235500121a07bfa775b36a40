@@ -1,0 +1,15 @@
+import java.awt.image.BufferedImage;
+
+
+public class Edges {
+
+	
+}
+public class VerticalMask extends Mask{
+	public VerticalMask(BufferedImage b){
+		super(b);
+	}
+	public int filter(int x, int y, BufferedImage b) {
+		return 0;
+	}
+}

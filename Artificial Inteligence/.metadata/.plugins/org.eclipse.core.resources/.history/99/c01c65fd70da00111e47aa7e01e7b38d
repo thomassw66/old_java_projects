@@ -1,0 +1,9 @@
+import java.awt.Graphics;
+
+
+public class GTObject {
+
+	public void draw(Graphics g){
+		
+	}
+}

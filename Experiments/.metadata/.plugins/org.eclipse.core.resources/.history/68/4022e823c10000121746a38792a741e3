@@ -1,0 +1,9 @@
+
+public class SpeedTest {
+
+	public static void main(String [] args){
+		long a = System.nanoTime();
+		long b = System.nanoTime();
+		System.out.println(b - a);
+	}
+}

@@ -1,0 +1,23 @@
+import java.awt.Color;
+import java.awt.Graphics;
+
+public class GTEnvironment {
+
+	final int EWIDTH;
+	final int EHIEGHT;
+	
+	public GTEnvironment(int w, int h){
+		EWIDTH = w;
+		EHIEGHT = h;
+	}
+	
+	public void paint(Graphics g){
+		g.fillRect(0,0,EWIDTH,EHIEGHT);
+		
+		int [] x = {0,100,130,200,200,240,250,400,500,600,650};
+		int [] y = {0,400,400,200,300,230,320,210,123,322,323};
+		GTPath p = new GTPath(x,y);
+		
+		p.draw(g);
+	}
+}

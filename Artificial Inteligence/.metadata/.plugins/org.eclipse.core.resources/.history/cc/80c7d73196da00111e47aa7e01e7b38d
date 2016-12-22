@@ -1,0 +1,50 @@
+import java.awt.Dimension;
+import java.awt.Frame;
+import java.awt.Graphics;
+import java.util.ArrayList;
+import java.util.Random;
+
+
+public class LineExperimentScene extends GTScene{
+
+	public static void main(String [] args){
+		GTViewingWindow gtvw = new GTViewingWindow();
+		Dimension d = gtvw.getSize();
+		new LineExperimentScene(d.height, d.width, gtvw);
+	}
+	
+	GTViewingWindow win;
+	public LineExperimentScene(int h, int w, GTViewingWindow g){
+		super(h,w);
+		win = g;
+		win.setScene(this);
+		Random r = new Random();
+		for(int i = 0; i < 20; i++){
+			line.add(new GTLine(r.nextDouble() * 1000,r.nextDouble() * 400,r.nextDouble()*6,r.nextDouble()*200));
+		}
+		Thread t = new Thread(new sceneRunner());
+	}
+	ArrayList<GTLine> line = new ArrayList<>();
+	public void draw(Graphics g) {
+		for(GTLine l : line)
+			l.draw(g);
+	}
+	public void update(){
+		
+	}
+	class sceneRunner implements Runnable {
+		public void run() {
+			while(true){
+				for(GTLine i : line)
+					i.rotate(.02);
+				win.repaint();
+				try {
+					Thread.sleep(100);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,7 @@
+
+public class MapEditPanel extends JPanel{
+
+	public MapEditPanel(){
+		
+	}
+}

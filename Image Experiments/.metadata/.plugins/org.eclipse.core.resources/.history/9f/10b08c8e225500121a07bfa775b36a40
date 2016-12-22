@@ -1,0 +1,18 @@
+import java.util.Arrays;
+
+
+public class RGB {
+	public static int rgb(int a){
+		return a + a << 8 + a << 16;
+	}
+	public static int [] fromRGB(int rgb){
+		int r = (rgb >> 16) & 0xFF;
+		int g = (rgb >> 8) & 0xFF;
+		int b = rgb & 0xFF;
+		int [] a = {r,g,b};
+		return a;
+	}
+	public static void main(String[] args){
+		System.out.println(Arrays.toString(fromRGB(rgb(2))));
+	}
+}

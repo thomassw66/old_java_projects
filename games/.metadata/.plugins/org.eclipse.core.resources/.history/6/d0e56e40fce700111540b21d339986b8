@@ -1,0 +1,9 @@
+import javax.swing.JPanel;
+
+
+public class MapEditPanel extends JPanel{
+
+	public MapEditPanel(){
+		
+	}
+}

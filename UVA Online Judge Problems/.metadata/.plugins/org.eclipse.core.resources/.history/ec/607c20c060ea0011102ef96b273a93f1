@@ -1,0 +1,75 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+
+public class Main {
+	static ArrayList<ArrayList<Integer>> intersections;
+	static int [][] connections;
+	public static void main(String [] args){
+		Scanner input = new Scanner(System.in);
+		while(input.hasNext()){
+			int roads = input.nextInt();
+			intersections = new ArrayList<ArrayList<Integer>>();
+			for(int i = 0; i < roads; i++){
+				int inter = input.nextInt();
+				int connectTo = input.nextInt();
+				
+				while(Math.max(inter, connectTo) >= intersections.size() )
+					intersections.add(new ArrayList<Integer>());
+				
+				intersections.get(inter).add(connectTo);
+			}
+			connections = new int[intersections.size()][intersections.size()];
+			numPaths();
+			System.out.println(intersections);
+			for(int [] a : connections)
+				printArray(a);
+		}
+	}
+	static void numPaths(){
+		for(int i = 0; i < intersections.size(); i++){
+			boolean loop = false;
+			if(connections[i][0] == -1)
+				continue;
+			ArrayList<Integer> c = intersections.get(i);
+			ArrayList<Integer> queue = new ArrayList<Integer>();
+			for(int z : c){
+				queue.add(z);
+				
+				while(queue.size() > 0){
+					int a = queue.remove(0);
+					inc(i,a);
+					
+					for(int b : intersections.get(a)){
+						if(b == i){
+							fillRow(i);
+							fillRow(b);
+							loop = true;
+							break;
+						}
+						connections[i][b] ++;
+						//we havent already put it in the queue
+						if(queue.indexOf(b) < 0)
+							queue.add(0, b);
+					}
+					if(loop)
+						break;
+				}
+			}
+		}
+	}
+	static void inc(int i, int a){
+		if(connections[i][a] != -1)
+			connections[i][a]++;
+	}
+	static void fillRow(int r){
+		for(int i = 0; i < connections[r].length; i++){
+			connections[r][i] = -1;
+		}
+	}
+	public static void printArray(int [] a){
+		for (int  i : a)
+			System.out.print(i+" ");
+		System.out.print("\n");
+	}
+}

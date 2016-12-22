@@ -1,0 +1,8 @@
+
+public class NQueens {
+
+	public NQueens() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

@@ -1,0 +1,33 @@
+import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
+
+import javax.swing.JFrame;
+
+
+public class MapEditFrame extends JFrame{
+
+	Image mapimage = null;
+	
+	public void init(String text){
+		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+		setSize(screen);
+		setTitle(text);
+		
+		if(mapimage == null)
+			mapimage = new BufferedImage(screen.width, screen.height, BufferedImage.TYPE_INT_RGB);
+		
+		setVisible(true);
+	}
+	public MapEditFrame(Image a){
+		mapimage = a;
+		init("Map From Existing Picture");
+	}
+	public MapEditFrame(){
+		init("New Map From Scratch");
+	}
+	public static void main(String[] args){
+		JFrame a = new MapEditFrame();
+	}
+}

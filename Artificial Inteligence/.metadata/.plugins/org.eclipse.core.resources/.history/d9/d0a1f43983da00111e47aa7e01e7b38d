@@ -1,0 +1,22 @@
+import javax.swing.*;
+import java.awt.*;
+
+public class GTViewingWindow extends JFrame{
+
+	public GTViewingWindow(){
+		setSize(1000, 500);
+		setLocation(200, 100);
+		add(new JPanel(){
+			GTEnvironment gte = new GTEnvironment(1000,500);
+			
+			public void paint(Graphics g){
+				gte.paint(g);
+			}
+		});
+		setVisible(true);
+	}
+	public static void main(String [] args){
+		Frame f = new GTViewingWindow();
+	}
+	
+}

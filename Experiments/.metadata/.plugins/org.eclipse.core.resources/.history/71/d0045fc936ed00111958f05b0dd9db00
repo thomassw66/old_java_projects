@@ -1,0 +1,53 @@
+import java.util.Arrays;
+import java.util.Scanner;
+
+
+public class NQueens {
+	static char [][] board;
+	static int [][] attacked;
+	
+	//different ways queens can move
+	static int delta[][] = {{1,0},{-1,0},{0,1},{0,-1},{-1,-1}, {-1, 1}, {1,-1}, {1,1}};
+	
+	public static void main(String [] args){
+		Scanner in = new Scanner(System.in);
+		
+		attacked = new int[8][8];
+		board = new char[8][8];
+		
+		for(int i = 0; i < board.length; i ++){
+			for(int j = 0; j < board.length; j++){
+				board[i][j] = ' ';
+			}
+		}
+		for(int i = 0; i < 8; i++){
+			int j = in.nextInt();
+			board[i][j] = 'Q';
+			addQ(i,j,0);
+		}
+		print(board);
+		print(attacked);
+	}
+	private static void print(char[][] board2) {
+		for(char [] b : board2){
+			System.out.println(Arrays.toString(b));
+		}
+	}
+	static void addQ(int x, int y, int n){
+		for(int a[] : delta){
+			int nx = x;
+			int ny = y;
+			while(inBounds(nx += a[0], ny += a[1])){
+				attacked[nx][ny] += n;
+			}
+		}
+	}
+	static boolean inBounds(int x,int y){
+		return (x < board.length && x >= 0) && (y < board[x].length && y >= 0);
+	}
+	static public void print(int[][] attacked2){
+		for(int [] b : attacked2){
+			System.out.println(Arrays.toString(b));
+		}
+	}
+}

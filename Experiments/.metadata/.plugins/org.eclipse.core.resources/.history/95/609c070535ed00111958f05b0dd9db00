@@ -1,0 +1,34 @@
+import java.util.Arrays;
+
+
+public class NQueens {
+	static char [][] board;
+	static int [][] attacked;
+	
+	//different ways queens can move
+	static int delta[][] = {{1,0},{-1,0},{0,1},{0,-1},{-1,-1}, {-1, 1}, {1,-1}, {1,1}};
+	
+	public static void main(String [] args){
+		attacked = new int[8][8];
+		board = new char[8][8];
+		addQ(2,2,1);
+		print(attacked);
+	}
+	static void addQ(int x, int y, int n){
+		for(int a[] : delta){
+			int nx = x;
+			int ny = y;
+			while(inBounds(nx += a[0], ny += a[1])){
+				attacked[nx][ny] += n;
+			}
+		}
+	}
+	static boolean inBounds(int x,int y){
+		return (x < board.length && x >= 0) && (y < board[x].length && y >= 0);
+	}
+	static public void print(int[][] attacked2){
+		for(int [] b : attacked2){
+			System.out.println(Arrays.toString(b));
+		}
+	}
+}

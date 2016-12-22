@@ -1,0 +1,82 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Scanner;
+
+
+public class NQueens {
+	static char [][] board;
+	static int [][] attacked;
+	static ArrayList<Integer> pos;
+	//different ways queens can move
+	static int delta[][] = {{1,0},{-1,0},{0,1},{0,-1},{-1,-1}, {-1, 1}, {1,-1}, {1,1}};
+	
+	public static void main(String [] args){
+		Scanner in = new Scanner(System.in);
+		
+		attacked = new int[8][8];
+		board = new char[8][8];
+		pos = new ArrayList<Integer>();
+		
+		for(int i = 0; i < board.length; i ++){
+			for(int j = 0; j < board.length; j++){
+				board[i][j] = ' ';
+			}
+		}
+		print(board);
+		print(attacked);
+		depthFirstSearch(0);
+	}
+	static void depthFirstSearch(int x){
+		//if we successfullyfill board with N queens
+		if(x >= board.length){
+			print(board);
+			return;
+		}
+		for(int i = 0;i < board.length; i++){
+			board[x][i] = 'Q';
+			addQ(x,i,1);
+			pos.add((x * 8)+i);
+			print(board);
+			//if we are already doomed!
+			if(!constraintBroken()){
+				System.out.println("Success!");
+				depthFirstSearch(x + 1);
+			}
+			//clean up for other iterations
+			board[x][i] = ' ';
+			addQ(x, i, -1);
+			pos.remove(pos.size() - 1);
+		}
+	}
+	static boolean constraintBroken(){
+		for(int a : pos){
+			int x = a / 8;
+			int y = a % 8;
+			if(attacked[x][y] > 0)
+				return true;
+		}
+		return true;
+	}
+	private static void print(char[][] board2) {
+		for(char [] b : board2){
+			System.out.println(Arrays.toString(b));
+		}
+	}
+	static void addQ(int x, int y, int n){
+		for(int a[] : delta){
+			int nx = x;
+			int ny = y;
+			while(inBounds(nx += a[0], ny += a[1])){
+				attacked[nx][ny] += n;
+			}
+		}
+	}
+	static boolean inBounds(int x,int y){
+		return (x < board.length && x >= 0) && (y < board[x].length && y >= 0);
+	}
+	static public void print(int[][] attacked2){
+		for(int [] b : attacked2){
+			System.out.println(Arrays.toString(b));
+		}
+	}
+}

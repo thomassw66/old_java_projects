@@ -1,0 +1,43 @@
+import java.awt.image.BufferedImage;
+
+
+public class Edges {
+	public static  BufferedImage getEdges(BufferedImage a){
+		return (new EdgeMask(a)).result();
+	}
+}
+class EdgeMask extends Mask{
+	VerticalMask x;
+	HorizontalMask y;
+	
+	public EdgeMask(BufferedImage b){
+		super(b);
+		x = new VerticalMask(b);
+		y = new HorizontalMask(b);
+	}
+	public int filter(int xi,int yi){
+		return (int) Math.sqrt(Math.pow(x.filter(xi, yi),2) + Math.pow(y.filter(xi, yi),2));
+	}
+}
+class VerticalMask extends Mask{
+	public VerticalMask(BufferedImage b){
+		super(b);
+	}
+	public int filter(int x, int y) {
+		if(x+1 >= image.getWidth())return 0;
+		int a = RGB.fromRGB(image.getRGB(x, y))[0];
+		int b = RGB.fromRGB(image.getRGB(x+1, y))[0];
+		return Math.abs(a - b);
+	}
+}
+class HorizontalMask extends Mask{
+	public HorizontalMask(BufferedImage b){
+		super(b);
+	}
+	public int filter(int x, int y) {
+		if(y+1 >= image.getHeight())return 0;
+		int a = RGB.fromRGB(image.getRGB(x, y))[0];
+		int b = RGB.fromRGB(image.getRGB(x, y+1))[0];
+		return Math.abs(a - b);
+	}
+}
